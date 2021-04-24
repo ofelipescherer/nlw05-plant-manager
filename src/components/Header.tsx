@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 40,
         marginTop: 40,
-        padding: 20
+        
     },
     image: {
         width: 80,
