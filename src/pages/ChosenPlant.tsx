@@ -24,6 +24,7 @@ export function ChosenPlant(){
     const route = useRoute();
     const { plant } = route.params as Params;   
 
+    const navigation = useNavigation()
 
     //We are not going to use event so we could use an _ like _ : Event to omit this parameter
     function handleChangeTime(event : Event , dateTime : Date | undefined){
@@ -51,6 +52,14 @@ export function ChosenPlant(){
             await plantSave({
                 ...plant,
                 dateTimeNotification: selectedDateTime
+            })
+
+            navigation.navigate('Confirmation', {
+                title: 'Tudo certo',
+                subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar sua planta',
+                buttonTitle: 'Muito obrigado',
+                icon: 'hug',
+                nextScreen: 'MyPlants'
             })
 
         }catch {

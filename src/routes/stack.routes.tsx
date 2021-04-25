@@ -7,6 +7,8 @@ import { Confirmation } from '../pages/Confirmation';
 import colors from '../styles/colors';
 import { PlantSelect } from '../pages/PlantSelect';
 import { ChosenPlant } from '../pages/ChosenPlant';
+import { MyPlants } from '../pages/MyPlants';
+import AuthRoutes from './tab.routes';
 
 
 
@@ -25,30 +27,35 @@ const AppRoutes: React.FC = () => (
         }}
    >
 
-       <stackRoutes.Screen 
+     <stackRoutes.Screen 
             name='Welcome'
             component={Welcome}
-       />
+     />
 
-        <stackRoutes.Screen 
-            name='UserIdentification'
-            component={UserIdentification}
-       />
+     <stackRoutes.Screen 
+          name='UserIdentification'
+          component={UserIdentification}
+     />
 
-        <stackRoutes.Screen 
-            name='Confirmation'
-            component={Confirmation}
-       />
+     <stackRoutes.Screen 
+          name='Confirmation'
+          component={Confirmation}
+     />
 
-       <stackRoutes.Screen 
-            name='PlantSelect'
-            component={PlantSelect}
-       />
+     <stackRoutes.Screen 
+          name='PlantSelect'
+          component={AuthRoutes}
+     />
 
-        <stackRoutes.Screen 
-            name='ChosenPlant'
-            component={ChosenPlant}
-       />
+     <stackRoutes.Screen 
+          name='ChosenPlant'
+          component={ChosenPlant}
+     />
+
+     <stackRoutes.Screen 
+          name='MyPlants'
+          component={AuthRoutes}
+     />
 
    </stackRoutes.Navigator>
 )
