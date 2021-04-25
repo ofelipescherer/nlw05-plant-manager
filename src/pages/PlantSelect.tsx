@@ -8,39 +8,28 @@ import { FlatList } from 'react-native-gesture-handler';
 import api from '../services/api';
 import { PlantCardPrimary } from '../components/PlantCardPrimary';
 import { Load } from '../components/Load';
+import { useNavigation } from '@react-navigation/core';
+import { PlantProps } from '../libs/storage';
 
 interface EnvironmentProps {
     key: string;
     title: string;
 }
 
-interface PlantsProps {
-        id: string;
-        name: string;
-        about: string;
-        water_tips: string;
-        photo: string;
-        environments: [string];
-        frequency: {
-          times: number,
-          repeat_every: string
-        }
-}
-
-
 export function PlantSelect() {
 
     //Setting the fake api
     const[environment, setEnvironment] = useState<EnvironmentProps[]>([]);
-    const[plants, setplants] = useState<PlantsProps[]>([]);
+    const[plants, setplants] = useState<PlantProps[]>([]);
     //FilteredPlants is an auxiliar state, just for the API don't do requests all time
-    const[filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
+    const[filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
     const[environmentSelected, setEnvironmentSelected] = useState('all')
     const[loading, setLoading] = useState(true)
 
     const[page, setPage] = useState(1)
     const[loadingMore, setLoadingMore] = useState(true)
-    const[loadedAll, setLoadedAll] = useState(false)
+    
+    const navigation = useNavigation();
 
     async function fetchPlants(){
         const {data} = await 
@@ -81,6 +70,10 @@ export function PlantSelect() {
         setPage(oldValue => oldValue + 1)
 
         fetchPlants()
+    }
+
+    function handlePlantSelected(plant : PlantProps){
+        navigation.navigate('ChosenPlant', { plant })
     }
 
     useEffect(() => {
@@ -130,6 +123,7 @@ export function PlantSelect() {
             <View>
                 <FlatList
                     data={environment}
+                    keyExtractor={(item) => String(item.key)}
                     renderItem={({ item }) => (
                         <EnvironmentButton
                             title={item.title}
@@ -146,8 +140,12 @@ export function PlantSelect() {
             <View style={styles.plants}>
                 <FlatList 
                     data ={filteredPlants}
+                    keyExtractor={(item) => String(item.id)}
                     renderItem={({ item }) => (
-                        <PlantCardPrimary data={item}/>
+                        <PlantCardPrimary 
+                            data={item}
+                            onPress={() => handlePlantSelected(item)}
+                        />
                     )}
                     showsVerticalScrollIndicator = {false}
                     numColumns={2}

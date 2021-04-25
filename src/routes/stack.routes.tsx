@@ -6,6 +6,7 @@ import { UserIdentification } from '../pages/UserIdentification';
 import { Confirmation } from '../pages/Confirmation';
 import colors from '../styles/colors';
 import { PlantSelect } from '../pages/PlantSelect';
+import { ChosenPlant } from '../pages/ChosenPlant';
 
 
 
@@ -42,6 +43,11 @@ const AppRoutes: React.FC = () => (
        <stackRoutes.Screen 
             name='PlantSelect'
             component={PlantSelect}
+       />
+
+        <stackRoutes.Screen 
+            name='ChosenPlant'
+            component={ChosenPlant}
        />
 
    </stackRoutes.Navigator>
