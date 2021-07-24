@@ -21,6 +21,7 @@ export function MyPlants(){
     const [nextWatered, setNextWatered] = useState<string>();
 
     useEffect(() => {
+
         async function loadStorageData(){
             const plantsStorage = await loadPlant();
 
